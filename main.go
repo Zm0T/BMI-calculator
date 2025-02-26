@@ -13,6 +13,10 @@ func main() {
 	var IMT float64 = calculateBMI(userKg, userHeight, BMIPower)
 
 	outputResult(IMT)
+
+	if IMT < 16 {
+		fmt.Println("У вас недостаток веса")
+	}
 }
 
 func outputResult(BMI float64) {
