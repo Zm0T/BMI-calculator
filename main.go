@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"math"
 )
@@ -12,18 +13,19 @@ func main() {
 	var userInput string
 	for {
 		userHeight, userKg := getUserInput()
-
-		var IMT float64 = calculateBMI(userKg, userHeight, BMIPower)
-
-		outputResult(IMT)
+		IMT, err := calculateBMI(userKg, userHeight, BMIPower)
+		if err != nil {
+			fmt.Println("Неверно введены значения")
+			continue
+		} else {
+			outputResult(IMT)
+		}
 
 		fmt.Println("Хотите ли вы продолжить? Введите y-да, n-нет")
 		fmt.Scan(&userInput)
 		if userInput == "n" {
 			fmt.Println("Программа завершила свою работу")
 			break
-		} else {
-			continue
 		}
 	}
 	//if IMT < 16 {
@@ -58,9 +60,12 @@ func outputResult(BMI float64) {
 	fmt.Printf("Ваш индекс массы телы: %.0f\n", BMI)
 }
 
-func calculateBMI(userKg float64, userHeight float64, BMIPower float64) float64 {
+func calculateBMI(userKg float64, userHeight float64, BMIPower float64) (float64, error) {
+	if userKg <= 0 || userHeight <= 0 {
+		return 0, errors.New("INPUT_ERROR")
+	}
 	BMI := userKg / math.Pow(userHeight/100, BMIPower)
-	return BMI
+	return BMI, nil
 }
 
 func getUserInput() (float64, float64) {
@@ -68,10 +73,10 @@ func getUserInput() (float64, float64) {
 	var userKg float64 = 100.0
 
 	fmt.Print("Введите свой рост в сантиметрах: ")
-	fmt.Scan(&userHeight)
+	fmt.Scanln(&userHeight)
 
 	fmt.Print("Введите свой вес: ")
-	fmt.Scan(&userKg)
+	fmt.Scanln(&userKg)
 
 	return userHeight, userKg
 }
