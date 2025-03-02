@@ -1,2 +1,72 @@
-.idea
-./BMI-calculator
+# Бинарные файлы, создаваемые при компиляции
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Директории с бинарными файлами и кэшем
+/bin/
+/pkg/
+/dist/
+/vendor/
+
+# Файлы сборки и кэша Go
+.go/
+.cache/
+
+# Файлы покрытия кода тестами
+*.cover
+coverage.txt
+coverage.html
+
+# Локальные файлы конфигурации Go
+go.work
+
+# Локальные логи
+*.log
+
+# Файлы профилирования
+*.prof
+*.pprof
+*.trace
+
+# Временные файлы
+*~
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# Файлы IDE и редакторов
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+*.sublime-workspace
+*.sublime-project
+.settings/
+
+# Файлы с локальными переменными окружения
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Файлы конфигурации базы данных и секретов
+*.pem
+*.key
+*.p12
+*.pfx
+*secret*
+
+# Директории и файлы для зависимостей и утилит
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
