@@ -5,31 +5,27 @@ import (
 	"math"
 )
 
+const BMIPower = 2
+
 func main() {
-	const BMIPower = 2
-	userHeight, userKg := getUserInput()
 	fmt.Println("___ Калькулятор индекса массы тела ___")
+	var userInput string
+	for {
+		userHeight, userKg := getUserInput()
 
-	var IMT float64 = calculateBMI(userKg, userHeight, BMIPower)
+		var IMT float64 = calculateBMI(userKg, userHeight, BMIPower)
 
-	outputResult(IMT)
+		outputResult(IMT)
 
-	switch {
-	case IMT < 16:
-
-		fmt.Println("У вас сильный недостаток веса")
-	case IMT < 18.5:
-
-		fmt.Println("Дефицит массы тела")
-	case IMT < 25:
-
-		fmt.Println("Нормальный вес")
-	case IMT < 30:
-		fmt.Println("Избиточный вес")
-	default:
-		fmt.Println("Степень ожирения")
+		fmt.Println("Хотите ли вы продолжить? Введите y-да, n-нет")
+		fmt.Scan(&userInput)
+		if userInput == "n" {
+			fmt.Println("Программа завершила свою работу")
+			break
+		} else {
+			continue
+		}
 	}
-
 	//if IMT < 16 {
 	//	fmt.Println("У вас сильный недостаток веса")
 	//} else if IMT >= 16 && IMT < 18.5 {
@@ -44,7 +40,22 @@ func main() {
 }
 
 func outputResult(BMI float64) {
-	fmt.Printf("Ваш индекс массы телы: %.0f", BMI)
+	switch {
+	case BMI < 16:
+
+		fmt.Println("У вас сильный недостаток веса")
+	case BMI < 18.5:
+
+		fmt.Println("Дефицит массы тела")
+	case BMI < 25:
+
+		fmt.Println("Нормальный вес")
+	case BMI < 30:
+		fmt.Println("Избиточный вес")
+	default:
+		fmt.Println("Степень ожирения")
+	}
+	fmt.Printf("Ваш индекс массы телы: %.0f\n", BMI)
 }
 
 func calculateBMI(userKg float64, userHeight float64, BMIPower float64) float64 {
