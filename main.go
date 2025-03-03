@@ -15,8 +15,9 @@ func main() {
 		userHeight, userKg := getUserInput()
 		IMT, err := calculateBMI(userKg, userHeight, BMIPower)
 		if err != nil {
-			fmt.Println("Неверно введены значения")
-			continue
+			panic("Не заданы параметры для расчета")
+			//fmt.Println("Неверно введены значения")
+			//continue
 		} else {
 			outputResult(IMT)
 		}
